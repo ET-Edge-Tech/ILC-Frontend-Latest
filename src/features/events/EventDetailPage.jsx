@@ -207,7 +207,7 @@ export default function EventDetailPage() {
       </Link>
 
       <section className="glass-card grid grid-cols-1 overflow-hidden rounded-2xl md:grid-cols-[14rem_minmax(0,1fr)] xl:grid-cols-[18rem_minmax(0,1fr)]">
-        <div className="mx-auto w-full max-w-xs md:max-w-none">
+        <div className="mx-auto w-full max-w-xs md:max-w-none md:self-center">
           <EventImage event={event} />
         </div>
         <div className="space-y-4 p-5 sm:p-7">
