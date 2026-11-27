@@ -33,6 +33,17 @@ export default function AdminNewsPage() {
             <p className="text-sm text-ilc-ink">
               <strong>{data.articles}</strong> articles are in the portal. Last read: <strong>{data.synced_at ? timeAgo(data.synced_at) : 'not yet'}</strong>.
             </p>
+            {data.sources && (
+              <ul className="space-y-1 text-sm text-ilc-ink">
+                <li>
+                  ET Insights: <strong>{data.sources.etinsights}</strong>
+                </li>
+                <li>
+                  CIO&amp;Leader: <strong>{data.sources.cioandleader}</strong>
+                  {data.cio_synced_at ? ` (last read ${timeAgo(data.cio_synced_at)})` : ''}
+                </li>
+              </ul>
+            )}
             <Button className="w-auto" loading={sync.isPending} onClick={() => sync.mutate()}>
               <RefreshCw className="h-4 w-4" aria-hidden="true" /> Read new articles now
             </Button>
