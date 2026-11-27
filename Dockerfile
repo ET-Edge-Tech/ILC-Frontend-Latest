@@ -1,5 +1,6 @@
 # ILC portal website. Built and run by Dokploy.
-# Step 1 builds the site with the API address (VITE_API_URL, a BUILD argument in Dokploy).
+# Step 1 builds the site with the API address. It defaults to the dev API; for another site (e.g. live) set the
+# build argument VITE_API_URL in Dokploy (Environment > Build-time Arguments).
 # Step 2 serves it with nginx and the security settings in deploy/nginx.conf, on port 3000.
 
 FROM node:24-bookworm-slim AS build
@@ -7,7 +8,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
 COPY . .
-ARG VITE_API_URL
+ARG VITE_API_URL=https://api-dev.indialeadershipcouncil.com/api
 ENV VITE_API_URL=$VITE_API_URL
 RUN test -n "$VITE_API_URL" || (echo "Set the build argument VITE_API_URL, e.g. https://api-dev.indialeadershipcouncil.com/api" && exit 1)
 RUN npm run build
