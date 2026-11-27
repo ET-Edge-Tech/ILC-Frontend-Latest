@@ -249,7 +249,7 @@ function EventForm({ initial, id }) {
           />
           {form.image_url && !imageError && (
             <div className="mt-2 w-28 overflow-hidden rounded-lg border border-gray-100">
-              <EventImage event={{ image_url: form.image_url, date: form.date }} />
+              <EventImage event={{ image_url: form.image_url, date: form.date, kind: form.kind }} />
             </div>
           )}
         </details>

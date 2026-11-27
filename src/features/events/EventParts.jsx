@@ -4,17 +4,19 @@ import { googleCalendarUrl, outlookCalendarUrl } from '../../lib/calendar.js';
 import { formatDateWithDay } from '../../lib/format.js';
 import { eventStateChip } from './event-utils.js';
 
-// Event picture: a tall poster (3:4). Without a picture (or if the link is broken), a branded placeholder shows the date.
+// Event picture: a tall poster (3:4) for ILC events. ET Edge posters are wide, so they get a wide box (16:9) and are
+// shown whole, never cut. Without a picture (or if the link is broken), a branded placeholder shows the date.
 export function EventImage({ event, className = '' }) {
   const [broken, setBroken] = useState(false);
   if (event.image_url && !broken) {
+    const wide = event.kind === 'ET_EDGE';
     return (
       <img
         src={event.image_url}
         alt=""
         loading="lazy"
         onError={() => setBroken(true)}
-        className={`aspect-[3/4] w-full object-cover ${className}`}
+        className={`w-full ${wide ? 'aspect-video bg-white object-contain' : 'aspect-[3/4] object-cover'} ${className}`}
       />
     );
   }
