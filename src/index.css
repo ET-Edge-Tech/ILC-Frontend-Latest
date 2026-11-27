@@ -1,0 +1,77 @@
+@import 'tailwindcss';
+
+/* Design tokens from the Developer Guide, section 4. Use these names in components, not raw hex. */
+@theme {
+  --color-ilc-purple: #360e4a;
+  --color-ilc-gold: #eda300;
+  --color-ilc-gold-deep: #8a5a00; /* gold for text on light backgrounds: the bright gold is too faint to read on white */
+  --color-ilc-cream: #fdfdfd;
+  --color-ilc-sidebar: #1a0525;
+  --color-ilc-ink: #2a0b38;
+  --color-ilc-page: #fcfbfa;
+
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+  body {
+    background: var(--color-ilc-page);
+    color: var(--color-ilc-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* Visible keyboard focus everywhere (accessibility). */
+  :focus-visible {
+    outline: 2px solid var(--color-ilc-gold);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .border-hairline {
+    border-width: 0.5px;
+  }
+  .text-luxury {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .glass-card {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    border: 0.5px solid rgba(54, 14, 74, 0.1);
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Hide the browser's own show-password eye (Edge); our own button does the job, so there was a double eye. */
+input::-ms-reveal,
+input::-ms-clear {
+  display: none;
+}
